@@ -1,0 +1,337 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fenyxn // The Apex Phoenix Brand Pack</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    /* Hidden canvas helper for PNG export */
+    #export-canvas {
+      display: none;
+    }
+    /* Simple custom toast animation */
+    #toast {
+      visibility: hidden;
+      min-width: 280px;
+      margin-left: -140px;
+      text-align: center;
+      border-radius: 12px;
+      padding: 16px;
+      position: fixed;
+      z-index: 100;
+      left: 50%;
+      bottom: 30px;
+      font-size: 14px;
+      transition: opacity 0.3s, bottom 0.3s;
+    }
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
+  </style>
+</head>
+<body class="bg-[#030712] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-pink-500 p-[1px] flex items-center justify-center">
+          <div class="w-full h-full bg-slate-950 rounded-xl flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-6 h-6">
+              <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="#f97316" />
+            </svg>
+          </div>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold tracking-wider font-display text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">
+            fenyxn
+          </h1>
+          <p class="text-[10px] text-slate-500 uppercase tracking-widest font-mono font-medium">Selected Identity // The Apex Phoenix</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs text-emerald-400 font-mono bg-emerald-950/30 border border-emerald-900/50 px-3 py-1.5 rounded-full">
+          ✓ Approved Brand Mark
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    
+    <!-- Left Configuration Panel -->
+    <aside class="lg:col-span-4 space-y-6">
+      <div class="bg-slate-900/50 border border-slate-850 rounded-2xl p-6 space-y-6 backdrop-blur-sm">
+        <div>
+          <h2 class="text-lg font-bold font-display text-slate-200">Asset Customizer</h2>
+          <p class="text-xs text-slate-500">Fine-tune your official logo assets for different screen and print profiles.</p>
+        </div>
+
+        <!-- Color Gradient Tuner -->
+        <div class="space-y-4">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Wing Gradient Colors</h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="space-y-1">
+              <label class="text-[11px] text-slate-500 block">Gradient Start</label>
+              <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
+                <input type="color" id="color-start" value="#f97316" oninput="updateGradients()" class="w-8 h-8 rounded border-none cursor-pointer bg-transparent">
+                <span id="color-start-hex" class="text-xs font-mono">#f97316</span>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] text-slate-500 block">Gradient End</label>
+              <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
+                <input type="color" id="color-end" value="#ec4899" oninput="updateGradients()" class="w-8 h-8 rounded border-none cursor-pointer bg-transparent">
+                <span id="color-end-hex" class="text-xs font-mono">#ec4899</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography Settings -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Wordmark Settings</h3>
+          <div>
+            <label class="text-[11px] text-slate-500 block mb-1">Company Wordmark Text</label>
+            <input type="text" id="company-name-input" value="fenyxn" oninput="updateWordmarkText()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-orange-500" />
+          </div>
+          <div>
+            <label class="text-[11px] text-slate-500 block mb-1">Tagline</label>
+            <input type="text" id="company-tagline-input" value="RISING FROM DATA" oninput="updateWordmarkText()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-orange-500" />
+          </div>
+        </div>
+
+        <!-- Export Actions -->
+        <div class="pt-4 border-t border-slate-800/80 space-y-3">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Asset Generation</h3>
+          <button onclick="copyActiveSVG()" class="w-full bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-slate-750 text-slate-200 font-semibold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+            <span>Copy Active SVG Code</span>
+          </button>
+          <button onclick="downloadCurrentSVG()" class="w-full bg-gradient-to-r from-orange-600 to-pink-500 hover:from-orange-500 hover:to-pink-400 text-white font-semibold py-2.5 rounded-xl text-xs shadow-lg transition-all flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>Download Vector (.svg)</span>
+          </button>
+          <button onclick="downloadPNG()" class="w-full bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-300 font-semibold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>Export High-Res Raster (.png)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick branding guidelines advice -->
+      <div class="bg-slate-900/30 border border-slate-900 p-5 rounded-2xl text-xs text-slate-400 space-y-2">
+        <h4 class="font-bold text-slate-200">Quick Alignment Guide</h4>
+        <p class="leading-relaxed">Keep clear space equal to half the width of the active phoenix wing on all sides. Avoid overlaying the wordmark text directly on dark elements without a solid high-contrast outline.</p>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <section class="lg:col-span-8 space-y-8">
+      
+      <!-- Nav tabs for Workspace views -->
+      <div class="flex gap-2 border-b border-slate-900 pb-px">
+        <button id="tab-btn-variations" onclick="switchMainTab('variations')" class="px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-t-xl transition-all border-t-2 border-orange-500 bg-slate-900 text-slate-100">
+          Official Variations
+        </button>
+        <button id="tab-btn-mockups" onclick="switchMainTab('mockups')" class="px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-t-xl transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-900/30">
+          Real-World Mockups
+        </button>
+      </div>
+
+      <!-- Tab Content: Variations -->
+      <div id="tab-content-variations" class="space-y-8 animate-fade-in">
+        
+        <!-- Grid of structural configurations -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Box 1: Icon Only -->
+          <div onclick="setActiveLogoSelection('variant-icon')" class="bg-slate-900/40 border border-slate-850 rounded-2xl p-6 flex flex-col items-center justify-between hover:border-orange-500/40 transition-all cursor-pointer group">
+            <div class="text-center w-full space-y-4">
+              <span class="text-[10px] font-mono text-slate-500 uppercase tracking-widest block">01 // Icon Mark</span>
+              <div class="bg-slate-950 rounded-xl py-10 flex items-center justify-center border border-slate-900 relative">
+                <svg id="variant-icon" viewBox="0 0 100 100" class="w-20 h-20">
+                  <defs>
+                    <linearGradient id="mainGrad-icon" x1="0%" y1="100%" x2="0%" y2="0%">
+                      <stop offset="0%" stop-color="#f97316" />
+                      <stop offset="100%" stop-color="#ec4899" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="url(#mainGrad-icon)" />
+                  <polygon points="50,42 58,58 50,74 42,58" fill="#ffffff" />
+                  <circle cx="50" cy="84" r="3" fill="#ec4899" />
+                </svg>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4 text-center">Perfect for App Icons, Favicons, and Social Media Profiles.</p>
+          </div>
+
+          <!-- Box 2: Vertical Stacked Lockup -->
+          <div onclick="setActiveLogoSelection('variant-stacked')" class="bg-slate-900/40 border border-slate-850 rounded-2xl p-6 flex flex-col items-center justify-between hover:border-orange-500/40 transition-all cursor-pointer group">
+            <div class="text-center w-full space-y-4">
+              <span class="text-[10px] font-mono text-slate-500 uppercase tracking-widest block">02 // Stacked Lockup</span>
+              <div class="bg-slate-950 rounded-xl py-6 flex items-center justify-center border border-slate-900">
+                <svg id="variant-stacked" viewBox="0 0 200 200" class="w-32 h-32">
+                  <defs>
+                    <linearGradient id="mainGrad-stacked" x1="0%" y1="100%" x2="0%" y2="0%">
+                      <stop offset="0%" stop-color="#f97316" />
+                      <stop offset="100%" stop-color="#ec4899" />
+                    </linearGradient>
+                  </defs>
+                  <!-- The Icon resized & shifted up -->
+                  <g transform="translate(50, 15) scale(1)">
+                    <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="url(#mainGrad-stacked)" />
+                    <polygon points="50,42 58,58 50,74 42,58" fill="#ffffff" />
+                    <circle cx="50" cy="84" r="3" fill="#ec4899" />
+                  </g>
+                  <!-- Typographic components -->
+                  <text class="logo-text-val font-display" x="100" y="145" fill="#ffffff" font-size="20" font-weight="700" text-anchor="middle" letter-spacing="3">fenyxn</text>
+                  <text class="logo-tag-val font-display" x="100" y="165" fill="#64748b" font-size="7" font-weight="600" text-anchor="middle" letter-spacing="4">RISING FROM DATA</text>
+                </svg>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4 text-center">Recommended for center-aligned website headers and packaging.</p>
+          </div>
+
+          <!-- Box 3: Horizontal Lockup -->
+          <div onclick="setActiveLogoSelection('variant-horizontal')" class="bg-slate-900/40 border border-slate-850 rounded-2xl p-6 flex flex-col items-center justify-between hover:border-orange-500/40 transition-all cursor-pointer group">
+            <div class="text-center w-full space-y-4">
+              <span class="text-[10px] font-mono text-slate-500 uppercase tracking-widest block">03 // Horizontal Lockup</span>
+              <div class="bg-slate-950 rounded-xl py-11 flex items-center justify-center border border-slate-900">
+                <svg id="variant-horizontal" viewBox="0 0 320 100" class="w-48 h-16">
+                  <defs>
+                    <linearGradient id="mainGrad-horizontal" x1="0%" y1="100%" x2="0%" y2="0%">
+                      <stop offset="0%" stop-color="#f97316" />
+                      <stop offset="100%" stop-color="#ec4899" />
+                    </linearGradient>
+                  </defs>
+                  <!-- The Icon on left -->
+                  <g transform="translate(15, 10) scale(0.8)">
+                    <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="url(#mainGrad-horizontal)" />
+                    <polygon points="50,42 58,58 50,74 42,58" fill="#ffffff" />
+                    <circle cx="50" cy="84" r="3" fill="#ec4899" />
+                  </g>
+                  <!-- Text block next to it -->
+                  <text class="logo-text-val font-display" x="110" y="52" fill="#ffffff" font-size="28" font-weight="700" letter-spacing="3">fenyxn</text>
+                  <text class="logo-tag-val font-display" x="112" y="72" fill="#64748b" font-size="8" font-weight="600" letter-spacing="4">RISING FROM DATA</text>
+                </svg>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4 text-center">The primary corporate format. Best for sidebars and menu systems.</p>
+          </div>
+
+        </div>
+
+        <!-- Giant Detail view of Selected Variant -->
+        <div class="bg-slate-950 border border-slate-900 rounded-2xl p-8 relative overflow-hidden flex flex-col items-center justify-center min-h-[380px]">
+          <!-- Micro background network grid -->
+          <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-10" />
+          
+          <div class="absolute top-4 left-4 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse"></span>
+            <span id="active-preview-label" class="text-[10px] font-mono text-slate-400 tracking-wider uppercase">Active Inspect: Stacked Lockup</span>
+          </div>
+
+          <!-- Dynamic SVG Canvas container -->
+          <div id="inspector-canvas-container" class="w-full max-w-md flex items-center justify-center py-6 transition-all duration-300">
+            <!-- Active SVG will get cloned here on state change -->
+          </div>
+
+          <div class="absolute bottom-4 text-center">
+            <p class="text-[10px] text-slate-500 font-mono">24-Bit Linear Gradient Vector // SVG 2.0 Namespace compliant</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tab Content: Mockups -->
+      <div id="tab-content-mockups" class="hidden space-y-8 animate-fade-in">
+        
+        <!-- Premium Business Cards -->
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold font-display uppercase tracking-wider text-slate-400">01 // Front & Back Corporate Cards</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Dark Front card -->
+            <div class="bg-[#0b0f19] border border-slate-800 rounded-2xl p-8 aspect-[1.75/1] relative overflow-hidden flex flex-col justify-between shadow-xl">
+              <div class="absolute -right-10 -bottom-10 opacity-10 w-48 h-48">
+                <svg viewBox="0 0 100 100" class="w-full h-full">
+                  <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="#ffffff" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <!-- Mini symbol copy -->
+                <svg id="mockup-mini-1" viewBox="0 0 100 100" class="w-8 h-8">
+                  <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="url(#mainGrad-icon)" />
+                </svg>
+                <span class="font-display font-bold tracking-widest text-sm text-white">fenyxn</span>
+              </div>
+              <div class="space-y-0.5">
+                <h4 class="text-xs font-semibold tracking-wider text-slate-400 uppercase font-mono">Alex Rivera</h4>
+                <p class="text-[10px] text-slate-500">Principal Systems Architect</p>
+              </div>
+            </div>
+
+            <!-- Light minimal back card -->
+            <div class="bg-white text-slate-900 rounded-2xl p-8 aspect-[1.75/1] relative overflow-hidden flex flex-col justify-between shadow-xl">
+              <div class="absolute -right-8 -top-8 opacity-5 w-40 h-40">
+                <svg viewBox="0 0 100 100" class="w-full h-full">
+                  <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="#000" />
+                </svg>
+              </div>
+              <div></div>
+              <div class="flex flex-col items-center justify-center self-center flex-1">
+                <svg viewBox="0 0 100 100" class="w-16 h-16">
+                  <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="#000000" />
+                  <polygon points="50,42 58,58 50,74 42,58" fill="#ffffff" />
+                </svg>
+                <span class="font-display font-bold tracking-widest text-xs mt-2 uppercase">fenyxn.com</span>
+              </div>
+              <div class="text-[9px] text-slate-400 font-mono text-center">San Francisco • Tokyo • London</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Premium Stationery & App Icon -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- App Icon Box -->
+          <div class="bg-slate-900/40 border border-slate-850 p-6 rounded-2xl flex flex-col justify-between space-y-4">
+            <div>
+              <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">02 // Mobile App Icon</h4>
+              <p class="text-[11px] text-slate-500">Display alignment inside a native rounded iOS/Android squircle container.</p>
+            </div>
+            
+            <div class="flex items-center justify-center py-6">
+              <!-- Squircle App Wrapper -->
+              <div class="w-24 h-24 bg-slate-950 rounded-[22px] flex items-center justify-center shadow-2xl border border-slate-800 relative group">
+                <div class="absolute inset-0 rounded-[22px] bg-gradient-to-tr from-orange-500/10 to-transparent"></div>
+                <svg viewBox="0 0 100 100" class="w-16 h-16">
+                  <path d="M50 15 L85 65 L65 65 L50 35 L35 65 L15 65 Z" fill="url(#mainGrad-icon)" />
+                  <polygon points="50,42 58,58 50,74 42,58" fill="#ffffff" />
+                </svg>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-500 text-center font-mono">App Store Icon Profile Grid compliant</p>
+          </div>
+
+          <!-- Merchandise Concept -->
+          <div class="bg-slate-900/40 border border-slate-850 p-6 rounded-2xl flex flex-col justify-between space-y-4">
+            <div>
+              <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">03 // Premium Merc

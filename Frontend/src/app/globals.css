@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark, .dark *));
+
+/* ── Dark theme (default) ── */
+:root {
+  --bg:      #050505;
+  --fg:      #f1f5f9;
+  --muted:   #475569;
+  --border:  rgba(255,255,255,0.05);
+  --card:    rgba(255,255,255,0.02);
+  --grid:    rgba(255,255,255,0.03);
+  --orb1:    rgba(96,165,250,0.07);
+  --orb2:    rgba(168,139,250,0.06);
+}
+
+/* ── Light theme ── */
+:root:not(.dark) {
+  --bg:      #f0f4ff;
+  --fg:      #0f172a;
+  --muted:   #64748b;
+  --border:  rgba(0,0,0,0.07);
+  --card:    rgba(255,255,255,0.7);
+  --grid:    rgba(99,102,241,0.06);
+  --orb1:    rgba(96,165,250,0.12);
+  --orb2:    rgba(168,139,250,0.10);
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: #050505;
+  color: var(--fg);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #38bdf8 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease infinite;
+}
+
+
+/* ── Keyframes ── */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes scroll-down {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(200%); }
+}
+
+@keyframes role-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-scroll-down {
+  animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+.animate-role-fade-in {
+  animation: role-fade-in 0.4s ease-out both;
+}
