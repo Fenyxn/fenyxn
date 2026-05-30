@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { projects, getProject } from "@/data/projects";
+import { visibleProjects, getProject } from "@/data/projects";
 import ProjectHeroVideo from "@/components/ProjectHeroVideo";
 
 type Params = Promise<{ slug: string }>;
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return visibleProjects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {

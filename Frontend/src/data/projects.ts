@@ -36,6 +36,8 @@ export type Project = {
   /** short category/tag shown on the card and detail hero */
   tag: string;
   status: "Live" | "Completed";
+  /** when true, the project is hidden from listings and not prerendered */
+  hidden?: boolean;
   /** ambient background video for the detail-page hero */
   heroVideo: string;
   /** one-line description used on the homepage card */
@@ -145,6 +147,7 @@ export const projects: Project[] = [
   },
   {
     slug: "trendedge",
+    hidden: true,
     num: "02",
     title: "TrendEdge",
     tag: "Fintech · Trading Automation",
@@ -211,6 +214,7 @@ export const projects: Project[] = [
   },
   {
     slug: "spacetime",
+    hidden: true,
     num: "03",
     title: "SpaceTime",
     tag: "Fintech · Market Data",
@@ -290,6 +294,7 @@ export const projects: Project[] = [
   },
   {
     slug: "company-management-system",
+    hidden: true,
     num: "04",
     title: "Company Management System",
     tag: "Enterprise Platform",
@@ -365,7 +370,7 @@ export const projects: Project[] = [
   },
   {
     slug: "delta-exchange-automation",
-    num: "05",
+    num: "02",
     title: "Delta Exchange Automation",
     tag: "Fintech · Trading Automation",
     status: "Completed",
@@ -438,6 +443,9 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+/** Projects shown in listings and prerendered as detail pages. */
+export const visibleProjects = projects.filter((p) => !p.hidden);
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);

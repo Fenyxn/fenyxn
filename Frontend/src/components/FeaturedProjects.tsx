@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { projects } from "@/data/projects";
+import { visibleProjects } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,7 +113,7 @@ export default function FeaturedProjects({ showHeader = true }: { showHeader?: b
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((p) => (
+          {visibleProjects.map((p) => (
             <Link
               key={p.slug}
               href={`/projects/${p.slug}`}
