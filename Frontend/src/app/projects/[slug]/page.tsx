@@ -50,7 +50,7 @@ export default async function ProjectDetail({ params }: { params: Params }) {
         <div className="absolute inset-x-0 top-6 z-10">
           <div className="max-w-4xl mx-auto px-4">
             <Link
-              href="/#work"
+              href="/work"
               className="animate-blur-fade-up inline-flex items-center gap-2 text-sm text-white rounded-full px-4 py-2 border border-white/25 bg-black/70 backdrop-blur-md shadow-lg hover:bg-black/85 hover:border-white/40 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -8,58 +8,61 @@ import { projects } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function FeaturedProjects() {
+export default function FeaturedProjects({ showHeader = true }: { showHeader?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(".proj-card", { opacity: 0, y: 70, scale: 0.93, filter: "blur(8px)" });
-      gsap.set(".proj-line", { scaleX: 0, transformOrigin: "left center" });
 
-      gsap.fromTo(
-        ".proj-eyebrow",
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power3.out",
+      if (showHeader) {
+        gsap.set(".proj-line", { scaleX: 0, transformOrigin: "left center" });
+
+        gsap.fromTo(
+          ".proj-eyebrow",
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: { trigger: ".proj-header", start: "top 82%" },
+          }
+        );
+
+        gsap.to(".proj-line", {
+          scaleX: 1,
+          duration: 1.1,
+          ease: "power3.inOut",
           scrollTrigger: { trigger: ".proj-header", start: "top 82%" },
-        }
-      );
+        });
 
-      gsap.to(".proj-line", {
-        scaleX: 1,
-        duration: 1.1,
-        ease: "power3.inOut",
-        scrollTrigger: { trigger: ".proj-header", start: "top 82%" },
-      });
+        gsap.fromTo(
+          ".proj-heading",
+          { opacity: 0, y: 35 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            delay: 0.15,
+            ease: "power3.out",
+            scrollTrigger: { trigger: ".proj-header", start: "top 82%" },
+          }
+        );
 
-      gsap.fromTo(
-        ".proj-heading",
-        { opacity: 0, y: 35 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          delay: 0.15,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".proj-header", start: "top 82%" },
-        }
-      );
-
-      gsap.fromTo(
-        ".proj-subtext",
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          delay: 0.28,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".proj-header", start: "top 82%" },
-        }
-      );
+        gsap.fromTo(
+          ".proj-subtext",
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            delay: 0.28,
+            ease: "power3.out",
+            scrollTrigger: { trigger: ".proj-header", start: "top 82%" },
+          }
+        );
+      }
 
       ScrollTrigger.batch(".proj-card", {
         onEnter: (batch) =>
@@ -77,12 +80,13 @@ export default function FeaturedProjects() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [showHeader]);
 
   return (
     <section id="work" ref={sectionRef} className="py-24 px-4 relative overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
+        {showHeader && (
         <div className="proj-header mb-16">
           <div className="flex items-center gap-4 mb-5">
             <p className="proj-eyebrow text-xs text-slate-500 font-medium uppercase tracking-[0.25em]">
@@ -105,6 +109,7 @@ export default function FeaturedProjects() {
             Real-time trading platforms, enterprise tooling, and automation pipelines — built end-to-end and deployed.
           </p>
         </div>
+        )}
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
