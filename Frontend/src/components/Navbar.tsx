@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
+import { useState } from "react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -10,32 +9,6 @@ const links = [
   { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
 ];
-
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return <div className="w-9 h-9" />;
-
-  const dark = theme === "dark";
-  return (
-    <button
-      onClick={() => setTheme(dark ? "light" : "dark")}
-      className="w-9 h-9 rounded-lg border border-white/10 dark:border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/20 transition-colors"
-      aria-label="Toggle theme"
-    >
-      {dark ? (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      ) : (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      )}
-    </button>
-  );
-}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -71,7 +44,6 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <ThemeToggle />
           <Link
             href="/contact"
             className="ml-1 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-colors"
@@ -81,7 +53,6 @@ export default function Navbar() {
         </nav>
 
         <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
           <button
             className="p-2 rounded-md text-slate-400 hover:text-slate-900 dark:hover:text-white"
             onClick={() => setOpen(!open)}
