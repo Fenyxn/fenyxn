@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects, getProject } from "@/data/projects";
+import ProjectHeroVideo from "@/components/ProjectHeroVideo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -34,12 +35,7 @@ export default async function ProjectDetail({ params }: { params: Params }) {
     <article className="relative">
       {/* ── Cinematic video header ── */}
       <header className="relative h-[62vh] min-h-[460px] w-full overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
+        <ProjectHeroVideo
           src={project.heroVideo}
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -203,9 +199,9 @@ export default async function ProjectDetail({ params }: { params: Params }) {
 
       {/* Footer CTA */}
       <div className="max-w-4xl mx-auto px-4 pb-24">
-        <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center">
-          <h2 className="text-xl font-bold text-white mb-3">Want something like this built?</h2>
-          <p className="text-white/60 text-sm mb-7 max-w-md mx-auto">
+        <section className="border-t border-white/5 pt-16 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Want something like this built?</h2>
+          <p className="text-slate-400 text-sm mb-8 max-w-md mx-auto">
             Let&apos;s talk about your trading system, internal tooling, or automation pipeline.
           </p>
           <Link

@@ -216,7 +216,7 @@ export const projects: Project[] = [
     tag: "Fintech · Market Data",
     status: "Live",
     heroVideo:
-      "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_080827_a9e5ad52-b6ee-4e79-b393-d936f179cfd7.mp4",
+      "https://stream.mux.com/kimF2ha9zLrX64H00UgLGPflCzNtl1T0215MlAmeOztv8.m3u8",
     summary:
       "High-throughput market data platform ingesting a DTN live feed via Redis Pub/Sub, computing Space-Time Reversal indicators with NumPy-vectorized windows, and fanning out to multi-chart frontends.",
     metric: "10,000+ ticks/sec",
