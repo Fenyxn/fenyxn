@@ -1,98 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { projects } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-type Project = {
-  num: string;
-  title: string;
-  tag: string;
-  status: "Live" | "Completed";
-  desc: string;
-  metric: string;
-  stack: string[];
-  gradient: string;
-  borderHover: string;
-  tagColor: string;
-  dot: string;
-  glowColor: string;
-};
-
-const projects: Project[] = [
-  {
-    num: "01",
-    title: "Laboratory Management System",
-    tag: "Enterprise Platform",
-    status: "Live",
-    desc: "Full-stack clinical lab platform with patient tracking, automated WhatsApp report delivery, and Keycloak group-based RBAC — five Docker services deployed end-to-end on GCP.",
-    metric: "5 Docker services · GCP",
-    stack: ["FastAPI", "Next.js", "PostgreSQL", "Keycloak", "WhatsApp API", "Docker", "GCP"],
-    gradient: "from-purple-600/10 to-purple-800/5",
-    borderHover: "hover:border-purple-500/30",
-    tagColor: "text-purple-400 bg-purple-500/10 border-purple-500/20",
-    dot: "bg-purple-400",
-    glowColor: "rgba(168,139,250,0.18)",
-  },
-  {
-    num: "02",
-    title: "TrendEdge",
-    tag: "Fintech · Trading Automation",
-    status: "Completed",
-    desc: "Real-time Supertrend trading platform with automated daily Zerodha login, multi-symbol KiteTicker streaming, auto strike selection, and live order execution with a forward-test mode.",
-    metric: "2+ req/sec · Zerodha Kite",
-    stack: ["FastAPI", "Next.js", "Socket.IO", "Zerodha Kite", "StockStats", "PostgreSQL", "Keycloak"],
-    gradient: "from-blue-600/10 to-blue-800/5",
-    borderHover: "hover:border-blue-500/30",
-    tagColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
-    dot: "bg-blue-400",
-    glowColor: "rgba(96,165,250,0.18)",
-  },
-  {
-    num: "03",
-    title: "SpaceTime",
-    tag: "Fintech · Market Data",
-    status: "Live",
-    desc: "High-throughput market data platform ingesting a DTN live feed via Redis Pub/Sub, computing Space-Time Reversal indicators with NumPy-vectorized windows, and fanning out to multi-chart frontends.",
-    metric: "10,000+ ticks/sec",
-    stack: ["FastAPI", "Redis Pub/Sub", "InfluxDB", "NumPy", "TradingView", "AWS", "Docker"],
-    gradient: "from-cyan-600/10 to-cyan-800/5",
-    borderHover: "hover:border-cyan-500/30",
-    tagColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
-    dot: "bg-cyan-400",
-    glowColor: "rgba(34,211,238,0.18)",
-  },
-  {
-    num: "04",
-    title: "Company Management System",
-    tag: "Enterprise Platform",
-    status: "Completed",
-    desc: "Full-stack enterprise suite spanning project tracking, GST/LUT invoicing, salary slips, finance reports, and multi-role RBAC — shipped both as a web app and an Electron desktop build.",
-    metric: "7 core modules · Electron",
-    stack: ["FastAPI", "Next.js", "Electron", "PostgreSQL", "Keycloak", "Google OAuth", "FullCalendar"],
-    gradient: "from-emerald-600/10 to-emerald-800/5",
-    borderHover: "hover:border-emerald-500/30",
-    tagColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-    dot: "bg-emerald-400",
-    glowColor: "rgba(52,211,153,0.18)",
-  },
-  {
-    num: "05",
-    title: "Delta Exchange Automation",
-    tag: "Fintech · Trading Automation",
-    status: "Completed",
-    desc: "Multi-symbol automated crypto trading system on Delta Exchange — live WebSocket monitoring, per-symbol strategy evaluation, automated entry/exit/stop-loss, and real-time Telegram alerts.",
-    metric: "Multi-symbol · Telegram alerts",
-    stack: ["FastAPI", "WebSockets", "Delta Exchange API", "Telegram Bot"],
-    gradient: "from-amber-600/10 to-amber-800/5",
-    borderHover: "hover:border-amber-500/30",
-    tagColor: "text-amber-400 bg-amber-500/10 border-amber-500/20",
-    dot: "bg-amber-400",
-    glowColor: "rgba(251,191,36,0.18)",
-  },
-];
 
 export default function FeaturedProjects() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -195,13 +109,14 @@ export default function FeaturedProjects() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((p) => (
-            <div
-              key={p.title}
-              className={`proj-card group flex flex-col p-8 rounded-2xl border border-white/5 bg-gradient-to-br ${p.gradient} ${p.borderHover} transition-colors duration-300 cursor-default`}
+            <Link
+              key={p.slug}
+              href={`/projects/${p.slug}`}
+              className={`proj-card group flex flex-col p-8 rounded-2xl border border-white/5 bg-gradient-to-br ${p.accent.gradient} ${p.accent.borderHover} transition-colors duration-300`}
               onMouseEnter={(e) => {
                 gsap.to(e.currentTarget, {
                   y: -6,
-                  boxShadow: `0 24px 64px ${p.glowColor}`,
+                  boxShadow: `0 24px 64px ${p.accent.glowColor}`,
                   duration: 0.3,
                   ease: "power2.out",
                 });
@@ -232,21 +147,21 @@ export default function FeaturedProjects() {
                 </span>
               </div>
 
-              <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full border mb-4 ${p.tagColor}`}>
+              <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full border mb-4 ${p.accent.tagColor}`}>
                 {p.tag}
               </span>
 
               <h3 className="text-white font-bold text-lg mb-3">{p.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-5">{p.desc}</p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-5">{p.summary}</p>
 
               {/* Metric */}
               <div className="flex items-center gap-2.5 mb-6 text-xs">
-                <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${p.dot}`} />
+                <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${p.accent.dot}`} />
                 <span className="text-slate-300 font-medium">{p.metric}</span>
               </div>
 
               {/* Tech stack chips */}
-              <div className="mt-auto flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2">
                 {p.stack.map((tech) => (
                   <span
                     key={tech}
@@ -256,7 +171,15 @@ export default function FeaturedProjects() {
                   </span>
                 ))}
               </div>
-            </div>
+
+              {/* View detail affordance */}
+              <span className={`mt-6 inline-flex items-center gap-1.5 text-xs font-medium ${p.accent.text} opacity-0 group-hover:opacity-100 transition-opacity`}>
+                View case study
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </Link>
           ))}
         </div>
       </div>
