@@ -110,7 +110,7 @@ export default function HeroSection() {
 
         <div className="hero-blur-in inline-flex gap-4 flex-wrap justify-center">
           <a
-            href="/services"
+            href="#work"
             className="rounded-full text-sm px-7 py-3.5 bg-white text-black font-medium hover:scale-105 transition-transform"
           >
             See Our Work

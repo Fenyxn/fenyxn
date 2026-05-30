@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import HeroSection from "@/components/HeroSection";
 import ExpertiseSection from "@/components/ExpertiseSection";
+import FeaturedProjects from "@/components/FeaturedProjects";
 
 
 export default function Home() {
@@ -12,6 +13,8 @@ export default function Home() {
       <HeroSection />
 
       <ExpertiseSection />
+
+      <FeaturedProjects />
 
       {/* CTA */}
       <section className="py-24 px-4">
