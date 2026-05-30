@@ -1,22 +1,34 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About — Fenyx",
-  description: "Learn about Fenyx, our mission, values, and the team behind our software solutions.",
+  title: "About — Fenyxn",
+  description:
+    "Fenyxn is a small, specialized software studio building real-time fintech systems, trading automation, and production-grade enterprise platforms.",
 };
 
 const team = [
-  { name: "Alex Rivera", role: "CEO & Co-founder", initials: "AR" },
-  { name: "Priya Nair", role: "CTO & Co-founder", initials: "PN" },
-  { name: "James Lin", role: "Head of Design", initials: "JL" },
-  { name: "Sara Müller", role: "Engineering Lead", initials: "SM" },
+  { name: "Akanksha Powar", role: "Founder & Lead Engineer", initials: "AP" },
+  { name: "Kusum Lohar", role: "Engineer", initials: "KL" },
+  { name: "Aniket Chougle", role: "Engineer", initials: "AC" },
 ];
 
 const values = [
-  { title: "Transparency", desc: "We communicate openly with clients and each other — no surprises, ever." },
-  { title: "Quality First", desc: "We'd rather ship right than ship fast. Every line of code is crafted with care." },
-  { title: "Client Success", desc: "Your success is our success. We measure our work by the impact it creates." },
-  { title: "Continuous Growth", desc: "We invest in learning, improve our craft, and stay ahead of the curve." },
+  {
+    title: "Production-first",
+    desc: "We ship. Every system we build runs in production under real load — not a demo that lives in a slide deck.",
+  },
+  {
+    title: "Performance under pressure",
+    desc: "Real-time by default. We design pipelines that hold up — REST APIs at 2+ req/sec and WebSocket feeds processing 10,000+ ticks per second.",
+  },
+  {
+    title: "End-to-end ownership",
+    desc: "From data ingestion to the dashboard, we own the full stack — backend, frontend, infrastructure, and deployment.",
+  },
+  {
+    title: "Clean architecture",
+    desc: "Fast feedback loops and code that stays maintainable, so the systems we ship keep evolving long after launch.",
+  },
 ];
 
 export default function About() {
@@ -28,10 +40,10 @@ export default function About() {
         <div className="relative max-w-3xl mx-auto">
           <p className="text-xs font-medium text-blue-400 uppercase tracking-widest mb-4">About Us</p>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-5 tracking-tight">
-            The team behind <span className="gradient-text">Fenyx</span>
+            The studio behind <span className="gradient-text">Fenyxn</span>
           </h1>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Engineers, designers, and strategists passionate about building software that makes a real difference.
+            A small, specialized software studio building real-time fintech systems, trading automation, and production-grade enterprise platforms.
           </p>
         </div>
       </section>
@@ -41,10 +53,10 @@ export default function About() {
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl font-bold text-white mb-6">Our Story</h2>
           <p className="text-slate-400 leading-relaxed mb-4">
-            Fenyx was founded in 2014 with a simple belief: great software should be accessible to every business, not just the Fortune 500. What started as a two-person consultancy has grown into a full-service technology partner trusted by companies across the globe.
+            Fenyxn is a focused engineering studio based in India. We specialize in the systems most teams find hardest to get right — real-time market data pipelines, algorithmic trading automation, and the enterprise tooling that keeps a business running.
           </p>
           <p className="text-slate-400 leading-relaxed">
-            Today, we work with startups, scale-ups, and enterprise teams to design, build, and evolve digital products. Our cross-functional teams bring together engineering excellence, thoughtful design, and strategic thinking to solve complex problems.
+            We build end-to-end: Python and FastAPI backends, Next.js and React frontends, Redis, InfluxDB and PostgreSQL data layers, all deployed on Docker, GCP, and AWS. Deliberately small and specialized, we&apos;ve shipped five production systems — from a clinical Laboratory Management platform to high-frequency trading engines processing tens of thousands of ticks per second.
           </p>
         </div>
       </section>
@@ -52,7 +64,7 @@ export default function About() {
       {/* Values */}
       <section className="py-20 px-4 border-y border-white/5">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-10 text-center">Our Values</h2>
+          <h2 className="text-2xl font-bold text-white mb-10 text-center">How We Work</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {values.map((v) => (
               <div key={v.title} className="p-6 rounded-xl border border-white/5 bg-white/[0.02] hover:border-blue-500/20 transition-colors">
@@ -68,7 +80,7 @@ export default function About() {
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-white mb-12">Meet the Team</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
             {team.map((member) => (
               <div key={member.name} className="flex flex-col items-center gap-4">
                 <div className="w-20 h-20 rounded-2xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-xl font-bold">
