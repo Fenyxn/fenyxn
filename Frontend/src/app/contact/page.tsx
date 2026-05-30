@@ -112,10 +112,14 @@ export default function Contact() {
               <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest" htmlFor="service">I&apos;m interested in</label>
               <select
                 id="service" value={form.service} onChange={handleChange}
-                className="w-full border border-slate-200 dark:border-white/8 rounded-lg px-4 py-3 text-sm bg-white dark:bg-white/[0.03] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30 transition-colors"
+                className="w-full border border-slate-200 dark:border-white/8 rounded-lg px-4 py-3 text-sm bg-white dark:bg-white/[0.03] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30 transition-colors [color-scheme:light] dark:[color-scheme:dark]"
               >
-                <option value="">Select a service...</option>
-                {services.map((s) => <option key={s} value={s}>{s}</option>)}
+                <option value="" className="bg-white text-slate-900 dark:bg-neutral-900 dark:text-white">Select a service...</option>
+                {services.map((s) => (
+                  <option key={s} value={s} className="bg-white text-slate-900 dark:bg-neutral-900 dark:text-white">
+                    {s}
+                  </option>
+                ))}
               </select>
             </div>
 
