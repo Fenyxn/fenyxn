@@ -44,14 +44,14 @@ export default async function ProjectDetail({ params }: { params: Params }) {
         {/* blend into page background + lift text contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/10 to-transparent pointer-events-none" />
         {/* top scrim so the back button stays legible over bright videos */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/45 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/55 to-transparent pointer-events-none" />
 
         {/* Back link */}
         <div className="absolute inset-x-0 top-6 z-10">
           <div className="max-w-4xl mx-auto px-4">
             <Link
               href="/#work"
-              className="animate-blur-fade-up inline-flex items-center gap-2 text-sm text-white rounded-full px-4 py-2 border border-white/20 bg-black/30 backdrop-blur-md hover:bg-black/45 hover:border-white/35 transition-colors"
+              className="animate-blur-fade-up inline-flex items-center gap-2 text-sm text-white rounded-full px-4 py-2 border border-white/25 bg-black/70 backdrop-blur-md shadow-lg hover:bg-black/85 hover:border-white/40 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
