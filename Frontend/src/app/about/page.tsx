@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 const team = [
   { name: "Akanksha Powar", role: "Founder & Lead Engineer", initials: "AP" },
-  { name: "Kusum Lohar", role: "Engineer", initials: "KL" },
-  { name: "Aniket Chougle", role: "Engineer", initials: "AC" },
+  { name: "Kusum Lohar", role: "Full-Stack Engineer", initials: "KL" },
+  { name: "Aniket Chougle", role: "Full-Stack Engineer", initials: "AC" },
 ];
 
 const values = [
