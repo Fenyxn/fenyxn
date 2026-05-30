@@ -53,7 +53,7 @@ export default async function ProjectDetail({ params }: { params: Params }) {
           <div className="max-w-4xl mx-auto px-4">
             <Link
               href="/#work"
-              className="liquid-glass animate-blur-fade-up inline-flex items-center gap-2 text-sm text-white rounded-full px-4 py-2 hover:scale-[1.03] transition-transform"
+              className="animate-blur-fade-up inline-flex items-center gap-2 text-sm text-white rounded-full px-4 py-2 border border-white/15 bg-white/[0.06] hover:bg-white/10 hover:border-white/25 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
@@ -120,7 +120,7 @@ export default async function ProjectDetail({ params }: { params: Params }) {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="liquid-glass inline-flex items-center gap-2 text-sm font-medium text-white px-5 py-2.5 rounded-full hover:scale-[1.03] transition-transform"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-white px-5 py-2.5 rounded-full border border-white/15 bg-white/[0.06] hover:bg-white/10 hover:border-white/25 transition-colors"
                     >
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.48v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0112 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.48A10.02 10.02 0 0022 12.26C22 6.58 17.52 2 12 2z" />
@@ -141,7 +141,7 @@ export default async function ProjectDetail({ params }: { params: Params }) {
           {project.metrics.map((m, i) => (
             <div
               key={m.label}
-              className="liquid-glass rounded-2xl p-5 animate-blur-fade-up"
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 animate-blur-fade-up"
               style={{ animationDelay: `${500 + i * 80}ms` }}
             >
               <p className="text-[11px] text-white/50 uppercase tracking-wider mb-1.5">{m.label}</p>
@@ -152,11 +152,11 @@ export default async function ProjectDetail({ params }: { params: Params }) {
 
         {/* Problem & Solution */}
         <section className="grid md:grid-cols-2 gap-8 mb-16">
-          <div className="liquid-glass rounded-2xl p-7">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-7">
             <h2 className="text-xs font-semibold text-white/50 uppercase tracking-[0.2em] mb-4">The Problem</h2>
             <p className="text-slate-300 text-sm leading-relaxed">{project.problem}</p>
           </div>
-          <div className="liquid-glass rounded-2xl p-7">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-7">
             <h2 className="text-xs font-semibold text-white/50 uppercase tracking-[0.2em] mb-4">The Solution</h2>
             <p className="text-slate-300 text-sm leading-relaxed">{project.solution}</p>
           </div>
@@ -184,30 +184,26 @@ export default async function ProjectDetail({ params }: { params: Params }) {
             ))}
           </div>
         </section>
-      </div>
 
-      {/* Tech stack marquee — full bleed */}
-      <section className="mb-20">
-        <div className="max-w-4xl mx-auto px-4">
+        {/* Tech stack */}
+        <section className="mb-4">
           <h2 className="text-2xl font-bold text-white mb-6">Tech stack</h2>
-        </div>
-        <div className="marquee-mask overflow-hidden">
-          <div className="flex w-max gap-3 animate-marquee-left">
-            {[...project.techStack, ...project.techStack].map((tech, i) => (
+          <div className="flex flex-wrap gap-2.5">
+            {project.techStack.map((tech) => (
               <span
-                key={`${tech}-${i}`}
-                className="liquid-glass shrink-0 text-sm text-white px-4 py-2.5 rounded-full"
+                key={tech}
+                className="text-sm text-slate-300 px-3.5 py-1.5 rounded-lg border border-white/10 bg-white/[0.04]"
               >
                 {tech}
               </span>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Footer CTA */}
       <div className="max-w-4xl mx-auto px-4 pb-24">
-        <section className="liquid-glass-strong rounded-2xl p-10 text-center">
+        <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center">
           <h2 className="text-xl font-bold text-white mb-3">Want something like this built?</h2>
           <p className="text-white/60 text-sm mb-7 max-w-md mx-auto">
             Let&apos;s talk about your trading system, internal tooling, or automation pipeline.

@@ -71,7 +71,7 @@ export const projects: Project[] = [
     tag: "Enterprise Platform",
     status: "Live",
     heroVideo:
-      "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_150203_44a5bd32-516a-47ce-a077-8acbf9aa8991.mp4",
+      "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4",
     summary:
       "Full-stack clinical lab platform with patient tracking, automated WhatsApp report delivery, and Keycloak group-based RBAC — five Docker services deployed end-to-end on GCP.",
     metric: "5 Docker services · GCP",
