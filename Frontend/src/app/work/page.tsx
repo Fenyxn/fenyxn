@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import FeaturedProjects from "@/components/FeaturedProjects";
 
 export const metadata: Metadata = {
-  title: "Work — Fenyxn",
+  title: "Work",
   description:
     "Production systems we've shipped — real-time trading platforms, market-data pipelines, enterprise management tools, and automation.",
 };

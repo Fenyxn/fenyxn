@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About — Fenyxn",
+  title: "About",
   description:
     "Fenyxn is a small, specialized software studio building real-time fintech systems, trading automation, and production-grade enterprise platforms.",
 };

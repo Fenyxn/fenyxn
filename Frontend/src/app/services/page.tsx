@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Services — Fenyx",
-  description: "Explore Fenyx's software development, cloud, and consulting services.",
+  title: "Services",
+  description: "Explore Fenyxn's software development, fintech, automation, and consulting services.",
 };
 
 const services = [
