@@ -4,7 +4,30 @@ import FeaturedProjects from "@/components/FeaturedProjects";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Production systems we've shipped — real-time trading platforms, market-data pipelines, enterprise management tools, and automation.",
+    "Production systems shipped by Fenyxn — real-time trading platforms, market-data pipelines, laboratory management systems, and automation tools.",
+  alternates: { canonical: "/work/" },
+  keywords: [
+    "Fenyxn portfolio",
+    "trading platform case study",
+    "LIMS software India",
+    "Delta Exchange automation project",
+    "fintech portfolio",
+    "software portfolio India",
+  ],
+  openGraph: {
+    title: "Our Work — Production Systems by Fenyxn",
+    description:
+      "Real-time trading platforms, market-data pipelines, laboratory management systems, and automation tools built by Fenyxn.",
+    url: "/work/",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Fenyxn Work Portfolio" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Work — Production Systems by Fenyxn",
+    description:
+      "Real-time trading platforms, market-data pipelines, laboratory management systems, and automation tools built by Fenyxn.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function Work() {

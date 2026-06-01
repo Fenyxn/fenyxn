@@ -4,6 +4,28 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Fenyxn is a small, specialized software studio building real-time fintech systems, trading automation, and production-grade enterprise platforms.",
+  alternates: { canonical: "/about/" },
+  keywords: [
+    "about Fenyxn",
+    "software studio team India",
+    "fintech engineers",
+    "trading automation team",
+    "Akanksha Powar",
+  ],
+  openGraph: {
+    title: "About Fenyxn — Our Team & Mission",
+    description:
+      "Fenyxn is a small, specialized software studio building real-time fintech systems, trading automation, and production-grade enterprise platforms.",
+    url: "/about/",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "About Fenyxn" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Fenyxn — Our Team & Mission",
+    description:
+      "Fenyxn is a small, specialized software studio building real-time fintech systems, trading automation, and production-grade enterprise platforms.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 const team = [

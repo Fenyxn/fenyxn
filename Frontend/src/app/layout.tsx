@@ -45,6 +45,11 @@ export const metadata: Metadata = {
     "Next.js",
     "full-stack development",
     "India",
+    "software development India",
+    "fintech startup India",
+    "enterprise software",
+    "crypto trading bot",
+    "Delta Exchange automation",
   ],
   authors: [{ name: "Fenyxn" }],
   creator: "Fenyxn",
@@ -58,11 +63,13 @@ export const metadata: Metadata = {
     title: "Fenyxn — Real-time Fintech & Software Studio",
     description: SITE_DESC,
     locale: "en_US",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Fenyxn — Real-time Fintech & Software Studio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Fenyxn — Real-time Fintech & Software Studio",
     description: SITE_DESC,
+    images: ["/opengraph-image.png"],
   },
   robots: {
     index: true,
@@ -76,9 +83,18 @@ const jsonLd = {
   "@type": "Organization",
   name: "Fenyxn",
   url: SITE_URL,
+  logo: `${SITE_URL}/favicon.svg`,
+  image: `${SITE_URL}/opengraph-image.png`,
   description: SITE_DESC,
   email: "fenyxn2402@gmail.com",
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "hello@fenyxn.in",
+    contactType: "customer service",
+  },
   sameAs: ["https://github.com/Fenyxn", "https://portfolio.fenyxn.in"],
+  foundingDate: "2024",
+  knowsAbout: ["Fintech", "Algorithmic Trading", "Real-time Systems", "Software Development", "Trading Automation"],
 };
 
 export default function RootLayout({

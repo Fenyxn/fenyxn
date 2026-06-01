@@ -17,12 +17,20 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return {
     title: project.title,
     description: project.subtitle,
+    keywords: [...project.stack, "Fenyxn", project.tag, "case study", "software project India"],
     alternates: { canonical: `/projects/${project.slug}/` },
     openGraph: {
       type: "article",
       title: `${project.title} — Fenyxn`,
       description: project.subtitle,
       url: `/projects/${project.slug}/`,
+      images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: `${project.title} — Fenyxn` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Fenyxn`,
+      description: project.subtitle,
+      images: ["/opengraph-image.png"],
     },
   };
 }
@@ -33,13 +41,38 @@ const ArrowRight = () => (
   </svg>
 );
 
+const SITE_URL = "https://fenyxn.in";
+
 export default async function ProjectDetail({ params }: { params: Params }) {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Work", item: `${SITE_URL}/work/` },
+      { "@type": "ListItem", position: 3, name: project.title, item: `${SITE_URL}/projects/${project.slug}/` },
+    ],
+  };
+
+  const projectLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: project.title,
+    description: project.subtitle,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    creator: { "@type": "Organization", name: "Fenyxn", url: SITE_URL },
+    url: `${SITE_URL}/projects/${project.slug}/`,
+  };
+
   return (
     <article className="relative">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectLd) }} />
       {/* ── Cinematic video header ── */}
       <header className="relative h-[62vh] min-h-[460px] w-full overflow-hidden">
         <ProjectHeroVideo

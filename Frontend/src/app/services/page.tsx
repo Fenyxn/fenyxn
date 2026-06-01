@@ -3,7 +3,32 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Explore Fenyxn's software development, fintech, automation, and consulting services.",
+  description:
+    "Fenyxn offers custom software development, real-time fintech systems, algorithmic trading automation, cloud infrastructure, and enterprise platform solutions.",
+  alternates: { canonical: "/services/" },
+  keywords: [
+    "software development services India",
+    "fintech development",
+    "algorithmic trading software",
+    "enterprise software India",
+    "cloud DevOps services",
+    "custom software studio",
+    "trading automation services",
+  ],
+  openGraph: {
+    title: "Services — Fenyxn Software Studio",
+    description:
+      "Custom software development, real-time fintech systems, algorithmic trading automation, and enterprise platforms.",
+    url: "/services/",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Fenyxn Services" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services — Fenyxn Software Studio",
+    description:
+      "Custom software development, real-time fintech systems, algorithmic trading automation, and enterprise platforms.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 const services = [
