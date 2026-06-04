@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { visibleProjects } from "@/data/projects";
 
+export const dynamic = "force-static";
+
 const SITE_URL = "https://fenyxn.in";
 
 export default function sitemap(): MetadataRoute.Sitemap {
