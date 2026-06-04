@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +18,7 @@ const expertise = [
     tagColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
     dot: "bg-blue-400",
     glowColor: "rgba(96,165,250,0.18)",
+    glow: "blue" as const,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
@@ -33,6 +35,7 @@ const expertise = [
     tagColor: "text-purple-400 bg-purple-500/10 border-purple-500/20",
     dot: "bg-purple-400",
     glowColor: "rgba(168,139,250,0.18)",
+    glow: "purple" as const,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -49,6 +52,7 @@ const expertise = [
     tagColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
     dot: "bg-cyan-400",
     glowColor: "rgba(34,211,238,0.18)",
+    glow: "blue" as const,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -65,6 +69,7 @@ const expertise = [
     tagColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
     dot: "bg-emerald-400",
     glowColor: "rgba(52,211,153,0.18)",
+    glow: "green" as const,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -178,13 +183,14 @@ export default function ExpertiseSection() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {expertise.map((item) => (
-            <div
+            <GlowCard
               key={item.title}
-              className={`exp-card group flex flex-col p-8 rounded-2xl border border-white/5 bg-gradient-to-br ${item.gradient} ${item.borderHover} transition-colors duration-300 cursor-default`}
+              customSize
+              glowColor={item.glow}
+              className={`exp-card w-full flex flex-col cursor-default`}
               onMouseEnter={(e) => {
                 gsap.to(e.currentTarget, {
                   y: -6,
-                  boxShadow: `0 24px 64px ${item.glowColor}`,
                   duration: 0.3,
                   ease: "power2.out",
                 });
@@ -192,7 +198,6 @@ export default function ExpertiseSection() {
               onMouseLeave={(e) => {
                 gsap.to(e.currentTarget, {
                   y: 0,
-                  boxShadow: "0 0 0px rgba(0,0,0,0)",
                   duration: 0.35,
                   ease: "power2.out",
                 });
@@ -217,7 +222,7 @@ export default function ExpertiseSection() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </GlowCard>
           ))}
         </div>
       </div>

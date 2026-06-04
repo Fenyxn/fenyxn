@@ -7,9 +7,11 @@ const CHAT_ID   = "994811437";
 
 const services = [
   "Algorithmic Trading & Fintech",
-  "Enterprise Management (LIMS)",
-  "Delta Exchange Integration",
-  "Messaging Automation (WhatsApp / Telegram / Email)",
+  "Enterprise Management System",
+  "Broker & Exchange Integration (Delta / Zerodha)",
+  "Messaging Automation (WhatsApp / Telegram / Gmail)",
+  "Cloud & DevOps",
+  "Custom Software Development",
   "Other",
 ];
 
