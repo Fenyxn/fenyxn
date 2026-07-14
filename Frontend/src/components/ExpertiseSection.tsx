@@ -83,7 +83,7 @@ export default function ExpertiseSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  // Auto-cycling layout transition across the four cards (anime.js)
+  // Scroll-driven layout transition across the four cards (anime.js + ScrollTrigger)
   useEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -95,31 +95,26 @@ export default function ExpertiseSection() {
 
     const layout = createLayout(grid, { children: ".exp-card" });
     let state = 1;
-    let cancelled = false;
-    let timeout: number;
 
-    const cycle = () => {
-      if (cancelled) return;
-      layout.update(
-        ({ root }) => {
-          state = (state % 4) + 1;
-          (root as HTMLElement).dataset.grid = String(state);
-        },
-        {
-          duration: 900,
-          delay: stagger(120),
-          onComplete: () => {
-            timeout = window.setTimeout(cycle, 2200);
+    const st = ScrollTrigger.create({
+      trigger: grid,
+      start: "top 75%",
+      end: "bottom 25%",
+      onUpdate: (self) => {
+        const next = Math.min(4, Math.floor(self.progress * 4) + 1);
+        if (next === state) return;
+        state = next;
+        layout.update(
+          ({ root }) => {
+            (root as HTMLElement).dataset.grid = String(state);
           },
-        }
-      );
-    };
-
-    timeout = window.setTimeout(cycle, 2200);
+          { duration: 700, delay: stagger(80) }
+        );
+      },
+    });
 
     return () => {
-      cancelled = true;
-      window.clearTimeout(timeout);
+      st.kill();
       layout.revert();
     };
   }, []);
