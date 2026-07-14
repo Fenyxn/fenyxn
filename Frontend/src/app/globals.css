@@ -113,3 +113,17 @@ body {
     opacity: 1;
   }
 }
+
+/* ── Expertise auto-layout grid (anime.js createLayout) ── */
+.exp-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .exp-grid { grid-template-columns: repeat(2, 1fr); }
+  .exp-grid[data-grid="1"] { grid-template-columns: repeat(2, 1fr); }
+  .exp-grid[data-grid="2"] { grid-template-columns: 1.6fr 1fr; }
+  .exp-grid[data-grid="3"] { grid-template-columns: 1fr 1.6fr; }
+  .exp-grid[data-grid="4"] { grid-template-columns: repeat(4, 1fr); }
+}

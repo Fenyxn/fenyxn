@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { createLayout, stagger } from "animejs";
 import { GlowCard } from "@/components/ui/spotlight-card";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -80,11 +81,51 @@ const expertise = [
 
 export default function ExpertiseSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Auto-cycling layout transition across the four cards (anime.js)
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    if (
+      !window.matchMedia("(min-width: 768px)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+
+    const layout = createLayout(grid, { children: ".exp-card" });
+    let state = 1;
+    let cancelled = false;
+    let timeout: number;
+
+    const cycle = () => {
+      if (cancelled) return;
+      layout.update(
+        ({ root }) => {
+          state = (state % 4) + 1;
+          (root as HTMLElement).dataset.grid = String(state);
+        },
+        {
+          duration: 900,
+          delay: stagger(120),
+          onComplete: () => {
+            timeout = window.setTimeout(cycle, 2200);
+          },
+        }
+      );
+    };
+
+    timeout = window.setTimeout(cycle, 2200);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeout);
+      layout.revert();
+    };
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hide cards before they animate in
-      gsap.set(".exp-card", { opacity: 0, y: 70, scale: 0.93, filter: "blur(8px)" });
       gsap.set(".exp-line", { scaleX: 0, transformOrigin: "left center" });
 
       // Header: eyebrow + line grow + heading
@@ -132,21 +173,6 @@ export default function ExpertiseSection() {
           scrollTrigger: { trigger: ".exp-header", start: "top 82%" },
         }
       );
-
-      // Cards: batch reveal as each row scrolls in
-      ScrollTrigger.batch(".exp-card", {
-        onEnter: (batch) =>
-          gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 0.75,
-            stagger: 0.12,
-            ease: "power3.out",
-          }),
-        start: "top 88%",
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -181,7 +207,7 @@ export default function ExpertiseSection() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div ref={gridRef} data-grid="1" className="exp-grid">
           {expertise.map((item) => (
             <GlowCard
               key={item.title}
