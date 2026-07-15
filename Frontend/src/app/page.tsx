@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import HeroSection from "@/components/HeroSection";
-import ExpertiseSection from "@/components/ExpertiseSection";
+import ForexAlgo from "@/components/ForexAlgo";
+import CryptoAlgo from "@/components/CryptoAlgo";
+import IndianAlgo from "@/components/IndianAlgo";
 
 
 export default function Home() {
@@ -11,7 +13,11 @@ export default function Home() {
     <>
       <HeroSection />
 
-      <ExpertiseSection />
+      <ForexAlgo />
+
+      <CryptoAlgo />
+
+      <IndianAlgo />
 
       {/* CTA */}
       <section className="py-24 px-4">
