@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import HeroSection from "@/components/HeroSection";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import ForexAlgo from "@/components/ForexAlgo";
 import CryptoAlgo from "@/components/CryptoAlgo";
 import IndianAlgo from "@/components/IndianAlgo";
@@ -12,6 +13,8 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+
+      <ProcessTimeline />
 
       <ForexAlgo />
 
