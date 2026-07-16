@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import indianMarkets from "@/assets/forex-desk.jpeg";
+import indianMarkets from "@/assets/forex-bullbear.jpeg";
 
 const features = [
   {
@@ -86,22 +86,30 @@ export default function IndianAlgo() {
             transition={{ duration: 0.7 }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-[680px] aspect-[16/9]">
-              <Image
-                src={indianMarkets}
-                alt="Indian markets trading"
-                fill
-                sizes="680px"
-                className="object-cover"
-                style={{
-                  maskImage:
-                    "linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)",
-                  maskComposite: "intersect",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)",
-                  WebkitMaskComposite: "source-in",
-                }}
-              />
+            <div
+              className="relative w-full max-w-[680px] aspect-[16/9] overflow-hidden"
+              style={{
+                maskImage:
+                  "linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)",
+                maskComposite: "intersect",
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)",
+                WebkitMaskComposite: "source-in",
+              }}
+            >
+              <motion.div
+                animate={{ scale: [1, 1.08, 1], x: [0, -12, 0], y: [0, 6, 0] }}
+                transition={{ duration: 18, ease: "easeInOut", repeat: Infinity }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={indianMarkets}
+                  alt="Bull versus bear market"
+                  fill
+                  sizes="680px"
+                  className="object-cover"
+                />
+              </motion.div>
             </div>
           </motion.div>
         </div>
