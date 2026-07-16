@@ -85,25 +85,19 @@ export default function ForexAlgo() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="flex justify-center lg:justify-end lg:-translate-y-12"
+            className="flex justify-center lg:justify-end lg:-translate-y-20"
           >
-            <div className="relative w-full max-w-[680px] aspect-[16/9]">
-              <video
-                src={forexVideo}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                style={{
-                  maskImage:
-                    "linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)",
-                  maskComposite: "intersect",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)",
-                  WebkitMaskComposite: "source-in",
-                }}
-              />
+            <div className="relative w-full max-w-[680px] p-3 rounded-2xl bg-[#030712] border border-cyan-500/10 shadow-2xl">
+              <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-white/[0.06]">
+                <video
+                  src={forexVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
