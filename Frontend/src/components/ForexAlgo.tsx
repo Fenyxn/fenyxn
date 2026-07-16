@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import forexBullBear from "@/assets/forex-bullbear.jpeg";
+
+const forexVideo = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/forex-trading.mp4`;
 
 const features = [
   {
@@ -79,7 +79,7 @@ export default function ForexAlgo() {
             </div>
           </motion.ul>
 
-          {/* Right: bull vs bear visual */}
+          {/* Right: video visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -88,18 +88,19 @@ export default function ForexAlgo() {
             className="flex justify-center lg:justify-end lg:-translate-y-12"
           >
             <div className="relative w-full max-w-[680px] aspect-[16/9]">
-              <Image
-                src={forexBullBear}
-                alt="Bull versus bear market"
-                fill
-                sizes="680px"
-                className="object-cover"
+              <video
+                src={forexVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                 style={{
                   maskImage:
-                    "linear-gradient(to right, transparent, black 12%, black 88%, transparent), linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+                    "linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)",
                   maskComposite: "intersect",
                   WebkitMaskImage:
-                    "linear-gradient(to right, transparent, black 12%, black 88%, transparent), linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+                    "linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)",
                   WebkitMaskComposite: "source-in",
                 }}
               />
