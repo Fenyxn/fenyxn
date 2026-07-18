@@ -9,6 +9,7 @@ import planningPhoto from "@/assets/process-planning.jpeg";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const designVideo = `${basePath}/process-design.mp4`;
 const developmentVideo = `${basePath}/process-development.mp4`;
+const testingVideo = `${basePath}/process-testing.mp4`;
 
 type Step = {
   id: number;
@@ -70,6 +71,7 @@ const steps: Step[] = [
     accent: "text-amber-400",
     ring: "border-amber-400 shadow-amber-500/30",
     icon: FlaskConical,
+    video: testingVideo,
   },
   {
     id: 5,
