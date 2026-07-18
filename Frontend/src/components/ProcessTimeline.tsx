@@ -6,7 +6,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Calendar, Check, Code, FileText, FlaskConical, Rocket, Zap } from "lucide-react";
 import planningPhoto from "@/assets/process-planning.jpeg";
 
-const designVideo = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/process-design.mp4`;
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const designVideo = `${basePath}/process-design.mp4`;
+const developmentVideo = `${basePath}/process-development.mp4`;
 
 type Step = {
   id: number;
@@ -56,6 +58,7 @@ const steps: Step[] = [
     accent: "text-purple-400",
     ring: "border-purple-400 shadow-purple-500/30",
     icon: Code,
+    video: developmentVideo,
   },
   {
     id: 4,
