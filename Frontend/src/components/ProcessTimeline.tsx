@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Calendar, Code, FileText, FlaskConical, Link2, Rocket, Zap } from "lucide-react";
+import { Calendar, Code, FileText, FlaskConical, Rocket, Zap } from "lucide-react";
 
 type Step = {
   id: number;
@@ -66,11 +66,6 @@ const steps: Step[] = [
   },
 ];
 
-const relatedTo = (id: number) => steps.filter((s) => Math.abs(s.id - id) === 1).map((s) => s.id);
-
-// Column width drives both the rail spacing and the slide maths.
-const COL = 160;
-
 export default function ProcessTimeline() {
   const [active, setActive] = useState(1);
   const [manual, setManual] = useState(false);
@@ -92,6 +87,7 @@ export default function ProcessTimeline() {
   };
 
   const current = steps.find((s) => s.id === active) ?? steps[0];
+  const fill = ((active - 1) / (steps.length - 1)) * 100;
 
   return (
     <section className="py-24 px-4 relative">
@@ -114,70 +110,72 @@ export default function ProcessTimeline() {
           </p>
         </div>
 
-        <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-          {/* Stage rail — slides so the active stage sits centre */}
-          <div
-            className="relative h-20 overflow-hidden"
-            style={{
-              maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-              WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-            }}
-          >
-            {/* left-1/2 puts the row's origin at the container centre, so translating by the
-                active column's centre lands that column dead centre — no measuring needed. */}
-            <div
-              className="absolute left-1/2 top-0 flex transition-transform duration-700 ease-out"
-              style={{ transform: `translateX(-${(active - 1) * COL + COL / 2}px)` }}
-            >
-              <div className="absolute top-5 h-px bg-white/10" style={{ left: COL / 2, width: (steps.length - 1) * COL }} />
+        <div
+          className="max-w-5xl mx-auto"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          <div className="relative flex flex-col gap-8 sm:grid sm:grid-cols-5 sm:gap-0">
+            {/* Rails run icon-centre to icon-centre; the inner div is the progress fill. */}
+            <div className="sm:hidden absolute left-6 top-6 bottom-6 w-px bg-white/10">
               <div
-                className="absolute top-5 h-px bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-400 transition-all duration-700 ease-out"
-                style={{ left: COL / 2, width: (active - 1) * COL }}
+                className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-400 transition-all duration-700 ease-out"
+                style={{ height: `${fill}%` }}
               />
+            </div>
+            <div className="hidden sm:block absolute top-6 left-[10%] right-[10%] h-px bg-white/10">
+              <div
+                className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-400 transition-all duration-700 ease-out"
+                style={{ width: `${fill}%` }}
+              />
+            </div>
 
-              {steps.map((step) => {
-                const Icon = step.icon;
-                const isActive = step.id === active;
-                const isDone = step.id < active;
+            {steps.map((step) => {
+              const Icon = step.icon;
+              const isActive = step.id === active;
+              const isDone = step.id < active;
 
-                return (
-                  <button
-                    key={step.id}
-                    onClick={() => select(step.id)}
-                    style={{ width: COL }}
-                    className="group relative shrink-0 flex flex-col items-center gap-3 cursor-pointer"
-                    aria-label={step.title}
+              return (
+                <button
+                  key={step.id}
+                  onClick={() => select(step.id)}
+                  aria-current={isActive}
+                  className="group relative flex items-center gap-4 text-left sm:flex-col sm:gap-3 sm:text-center cursor-pointer"
+                >
+                  <span
+                    className={`relative w-12 h-12 shrink-0 rounded-full flex items-center justify-center border-2 bg-[#050505] transition-all duration-500 ${
+                      isActive
+                        ? `${step.ring} ${step.accent} scale-110 shadow-lg`
+                        : isDone
+                          ? `border-white/30 ${step.accent}`
+                          : "border-white/15 text-white/40 group-hover:border-white/40 group-hover:text-white/70"
+                    }`}
                   >
-                    <span
-                      className={`relative w-10 h-10 rounded-full flex items-center justify-center border-2 bg-[#050505] transition-all duration-500 ${
-                        isActive
-                          ? `${step.ring} ${step.accent} scale-125 shadow-lg`
-                          : isDone
-                            ? `border-white/30 ${step.accent}`
-                            : "border-white/15 text-white/40 group-hover:border-white/40 group-hover:text-white/70"
-                      }`}
-                    >
-                      <Icon size={16} />
-                      {isActive && !manual && !hovered && (
-                        <span className="absolute -inset-1 rounded-full border border-white/20 animate-ping" />
-                      )}
-                    </span>
+                    <Icon size={18} />
+                    {isActive && !manual && !hovered && (
+                      <span className="absolute -inset-1 rounded-full border border-white/20 animate-ping" />
+                    )}
+                  </span>
 
+                  <span className="sm:contents">
                     <span
-                      className={`text-[11px] sm:text-xs font-semibold tracking-wider transition-colors duration-300 ${
+                      className={`block text-sm font-semibold tracking-wide transition-colors duration-300 ${
                         isActive ? "text-white" : "text-white/50 group-hover:text-white/80"
                       }`}
                     >
                       {step.title}
                     </span>
-                  </button>
-                );
-              })}
-            </div>
+                    <span className="block text-[10px] font-mono uppercase tracking-wider text-white/35">
+                      {step.tag}
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Stage detail */}
-          <div className="mt-12 flex justify-center min-h-[230px]">
+          <div className="mt-12 min-h-[190px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.id}
@@ -185,7 +183,7 @@ export default function ProcessTimeline() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className="w-full max-w-md rounded-xl bg-[#030712]/95 backdrop-blur-lg border border-white/20 shadow-2xl shadow-white/5 p-5 text-left"
+                className="rounded-2xl bg-[#030712]/95 backdrop-blur-lg border border-white/15 shadow-2xl shadow-black/40 p-6 sm:p-8"
               >
                 <div className="flex justify-between items-center">
                   <span className="px-2 py-0.5 rounded-full bg-white text-black text-[10px] font-semibold tracking-wider">
@@ -196,13 +194,13 @@ export default function ProcessTimeline() {
                   </span>
                 </div>
 
-                <h3 className="text-base font-semibold text-white mt-3">{current.title}</h3>
-                <p className="text-xs text-white/80 leading-relaxed mt-2">{current.blurb}</p>
+                <h3 className={`text-xl sm:text-2xl font-semibold mt-4 ${current.accent}`}>{current.title}</h3>
+                <p className="text-sm text-white/70 leading-relaxed mt-3 max-w-2xl">{current.blurb}</p>
 
-                <div className="mt-4 pt-3 border-t border-white/10">
-                  <div className="flex justify-between items-center text-xs mb-1.5">
+                <div className="mt-6 pt-4 border-t border-white/10">
+                  <div className="flex justify-between items-center text-xs mb-2">
                     <span className="flex items-center text-white/70">
-                      <Zap size={10} className="mr-1" />
+                      <Zap size={11} className="mr-1.5" />
                       Stage
                     </span>
                     <span className="font-mono text-white/70">
@@ -216,31 +214,6 @@ export default function ProcessTimeline() {
                       animate={{ width: `${(current.id / steps.length) * 100}%` }}
                       transition={{ duration: 0.5, ease: "easeOut" }}
                     />
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-white/10">
-                  <div className="flex items-center mb-2">
-                    <Link2 size={10} className="text-white/70 mr-1" />
-                    <h4 className="text-[10px] uppercase tracking-wider font-medium text-white/70">
-                      Related Stages
-                    </h4>
-                  </div>
-                  <div className="flex flex-wrap gap-1">
-                    {relatedTo(current.id).map((rid) => {
-                      const r = steps.find((s) => s.id === rid);
-                      if (!r) return null;
-                      return (
-                        <button
-                          key={rid}
-                          onClick={() => select(rid)}
-                          className="flex items-center h-6 px-2 text-[11px] rounded-md border border-white/20 hover:bg-white/10 text-white/80 hover:text-white transition-all"
-                        >
-                          {r.title}
-                          <ArrowRight size={8} className="ml-1 text-white/60" />
-                        </button>
-                      );
-                    })}
                   </div>
                 </div>
               </motion.div>
