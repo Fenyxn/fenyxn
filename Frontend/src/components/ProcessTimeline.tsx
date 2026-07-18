@@ -184,10 +184,10 @@ export default function ProcessTimeline() {
             })}
           </div>
 
-          {/* Stage detail — the photo sits proud of the card, which acts as a backing panel */}
-          <div className="mt-16 md:pl-10">
-            <div className="relative rounded-2xl bg-[#030712]/95 backdrop-blur-lg border border-white/15 shadow-2xl shadow-black/40 p-6 sm:p-8 md:grid md:grid-cols-2 md:gap-10 md:items-center">
-              <div className="relative aspect-[16/10] rounded-xl overflow-hidden ring-1 ring-white/15 shadow-2xl shadow-black/70 -mt-12 md:mt-0 md:-ml-20">
+          {/* Stage detail — only the photo is carded; the copy sits bare on the section */}
+          <div className="mt-16 md:grid md:grid-cols-2 md:gap-12 md:items-center">
+            <div className="rounded-2xl bg-[#030712]/95 backdrop-blur-lg border border-white/15 shadow-2xl shadow-black/40 p-3">
+              <div className="relative aspect-[16/10] rounded-xl overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={current.id}
@@ -214,59 +214,59 @@ export default function ProcessTimeline() {
                   </motion.div>
                 </AnimatePresence>
               </div>
+            </div>
 
-              <div className="mt-6 md:mt-0 min-h-[260px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={current.id}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -12 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="px-2 py-0.5 rounded-full bg-white text-black text-[10px] font-semibold tracking-wider">
-                        STEP {String(current.id).padStart(2, "0")}
+            <div className="mt-8 md:mt-0 min-h-[260px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="px-2 py-0.5 rounded-full bg-white text-black text-[10px] font-semibold tracking-wider">
+                      STEP {String(current.id).padStart(2, "0")}
+                    </span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-white/50">
+                      {current.tag}
+                    </span>
+                  </div>
+
+                  <h3 className={`text-xl sm:text-2xl font-semibold mt-4 ${current.accent}`}>{current.title}</h3>
+                  <p className="text-sm text-white/70 leading-relaxed mt-3">{current.blurb}</p>
+
+                  <ul className="mt-5 space-y-2">
+                    {current.deliverables.map((d) => (
+                      <li key={d} className="flex items-start gap-2 text-xs text-white/60">
+                        <Check size={13} className={`mt-px shrink-0 ${current.accent}`} />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-6 pt-4 border-t border-white/10">
+                    <div className="flex justify-between items-center text-xs mb-2">
+                      <span className="flex items-center text-white/70">
+                        <Zap size={11} className="mr-1.5" />
+                        Stage
                       </span>
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-white/50">
-                        {current.tag}
+                      <span className="font-mono text-white/70">
+                        {current.id} / {steps.length}
                       </span>
                     </div>
-
-                    <h3 className={`text-xl sm:text-2xl font-semibold mt-4 ${current.accent}`}>{current.title}</h3>
-                    <p className="text-sm text-white/70 leading-relaxed mt-3">{current.blurb}</p>
-
-                    <ul className="mt-5 space-y-2">
-                      {current.deliverables.map((d) => (
-                        <li key={d} className="flex items-start gap-2 text-xs text-white/60">
-                          <Check size={13} className={`mt-px shrink-0 ${current.accent}`} />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-6 pt-4 border-t border-white/10">
-                      <div className="flex justify-between items-center text-xs mb-2">
-                        <span className="flex items-center text-white/70">
-                          <Zap size={11} className="mr-1.5" />
-                          Stage
-                        </span>
-                        <span className="font-mono text-white/70">
-                          {current.id} / {steps.length}
-                        </span>
-                      </div>
-                      <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${(current.id / steps.length) * 100}%` }}
-                          transition={{ duration: 0.5, ease: "easeOut" }}
-                        />
-                      </div>
+                    <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${(current.id / steps.length) * 100}%` }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                      />
                     </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
