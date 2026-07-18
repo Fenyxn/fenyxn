@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Calendar, Check, Code, FileText, FlaskConical, Rocket, Zap } from "lucide-react";
 import planningPhoto from "@/assets/process-planning.jpeg";
 
+const designVideo = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/process-design.mp4`;
+
 type Step = {
   id: number;
   title: string;
@@ -16,6 +18,7 @@ type Step = {
   ring: string;
   icon: React.ElementType;
   photo?: StaticImageData;
+  video?: string;
 };
 
 const steps: Step[] = [
@@ -41,6 +44,7 @@ const steps: Step[] = [
     accent: "text-cyan-400",
     ring: "border-cyan-400 shadow-cyan-500/30",
     icon: FileText,
+    video: designVideo,
   },
   {
     id: 3,
@@ -205,6 +209,15 @@ export default function ProcessTimeline() {
                       >
                         <Image src={current.photo} alt={current.title} fill sizes="520px" className="object-cover" />
                       </motion.div>
+                    ) : current.video ? (
+                      <video
+                        src={current.video}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                      />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-white/[0.07] to-transparent">
                         <current.icon size={44} className={`${current.accent} opacity-40`} />
