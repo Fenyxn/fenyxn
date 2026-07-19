@@ -10,6 +10,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const designVideo = `${basePath}/process-design.mp4`;
 const developmentVideo = `${basePath}/process-development.mp4`;
 const testingVideo = `${basePath}/process-testing.mp4`;
+const deliveryVideo = `${basePath}/process-delivery.mp4`;
 
 type Step = {
   id: number;
@@ -82,6 +83,7 @@ const steps: Step[] = [
     accent: "text-emerald-400",
     ring: "border-emerald-400 shadow-emerald-500/30",
     icon: Rocket,
+    video: deliveryVideo,
   },
 ];
 
