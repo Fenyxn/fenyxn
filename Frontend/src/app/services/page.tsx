@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import ServicesGrid, { services } from "@/components/ServicesGrid";
+import ServicesGrid from "@/components/ServicesGrid";
+import { services } from "@/data/services";
 
 const SITE_URL = "https://fenyxn.in";
 
