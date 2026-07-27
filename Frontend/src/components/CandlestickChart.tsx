@@ -93,7 +93,9 @@ export default function CandlestickChart({ symbol = "NIFTY 50" }: { symbol?: str
     let elapsed = 0;
     let id = requestAnimationFrame(function step(now) {
       if (visible) {
-        elapsed = (elapsed + (now - prev) / 1000) % LOOP;
+        // rAF timestamps are frame-start times and can predate the performance.now()
+        // captured above; a negative delta would send elapsed (and the reveal index) below zero
+        elapsed = (elapsed + Math.max(0, now - prev) / 1000) % LOOP;
         setT(elapsed);
       }
       prev = now;
