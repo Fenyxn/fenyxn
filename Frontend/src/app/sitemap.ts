@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { visibleProjects } from "@/data/projects";
+import { articles } from "@/data/articles";
 
 export const dynamic = "force-static";
 
@@ -17,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/indian-algo",
     "/crypto-algo",
     "/forex-algo",
+    "/learn",
   ].map((path) => ({
     url: `${SITE_URL}${path}/`,
     lastModified: now,
@@ -31,5 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...projectPages];
+  const articlePages = articles.map((a) => ({
+    url: `${SITE_URL}/learn/${a.slug}/`,
+    lastModified: new Date(a.updated),
+    changeFrequency: "yearly" as const,
+    priority: 0.7,
+  }));
+
+  return [...pages, ...projectPages, ...articlePages];
 }

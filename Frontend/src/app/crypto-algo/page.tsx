@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getArticle } from "@/data/articles";
 
 export const metadata: Metadata = {
   title: "Crypto Algo Trading — Trend & Grid Strategies",
@@ -68,6 +69,12 @@ const strategies = [
     ],
   },
 ];
+
+const guides = [
+  "what-is-algorithmic-trading",
+  "backtesting-a-trading-strategy",
+  "supertrend-intraday-strategy",
+].map((slug) => getArticle(slug)!);
 
 export default function CryptoAlgoPage() {
   return (
@@ -139,6 +146,32 @@ export default function CryptoAlgoPage() {
                   ))}
                 </ul>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Guides */}
+      <section className="py-16 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Understand it first</h2>
+          <p className="text-slate-400 max-w-2xl mb-12 leading-relaxed">
+            We write up how these systems actually work — what a trading algorithm really is, how to test one
+            honestly, and how a signal-driven strategy is built.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {guides.map((g) => (
+              <Link
+                key={g.slug}
+                href={`/learn/${g.slug}/`}
+                className="group rounded-xl border border-white/8 bg-white/[0.02] p-6 hover:border-amber-400/25 hover:bg-white/[0.04] transition-colors"
+              >
+                <span className="text-xs font-semibold text-amber-400">{g.tag}</span>
+                <h3 className="text-white font-semibold mt-2 mb-2 group-hover:text-amber-200 transition-colors">
+                  {g.title}
+                </h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{g.summary}</p>
+              </Link>
             ))}
           </div>
         </div>

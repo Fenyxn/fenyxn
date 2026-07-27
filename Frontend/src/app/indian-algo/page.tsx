@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getArticle } from "@/data/articles";
 
 export const metadata: Metadata = {
   title: "Indian Algo Trading — Intraday & Options Strategies",
@@ -82,6 +83,12 @@ const strategies = [
     ],
   },
 ];
+
+const guides = [
+  "is-algo-trading-legal-in-india",
+  "indian-broker-apis-compared",
+  "supertrend-intraday-strategy",
+].map((slug) => getArticle(slug)!);
 
 export default function IndianAlgoPage() {
   return (
@@ -174,6 +181,32 @@ export default function IndianAlgoPage() {
               >
                 {b}
               </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Guides */}
+      <section className="py-16 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Understand it first</h2>
+          <p className="text-slate-400 max-w-2xl mb-12 leading-relaxed">
+            We write up how these systems actually work — what SEBI allows, what the broker APIs really do, and
+            how the intraday strategy above is built.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {guides.map((g) => (
+              <Link
+                key={g.slug}
+                href={`/learn/${g.slug}/`}
+                className="group rounded-xl border border-white/8 bg-white/[0.02] p-6 hover:border-orange-400/25 hover:bg-white/[0.04] transition-colors"
+              >
+                <span className="text-xs font-semibold text-orange-400">{g.tag}</span>
+                <h3 className="text-white font-semibold mt-2 mb-2 group-hover:text-orange-200 transition-colors">
+                  {g.title}
+                </h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{g.summary}</p>
+              </Link>
             ))}
           </div>
         </div>
