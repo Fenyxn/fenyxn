@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     siteName: "Fenyxn",
     title: "Fenyxn — Real-time Fintech & Software Studio",
     description: SITE_DESC,
-    locale: "en_US",
+    locale: "en_IN",
     images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Fenyxn — Real-time Fintech & Software Studio" }],
   },
   twitter: {
@@ -80,21 +80,42 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Fenyxn",
-  url: SITE_URL,
-  logo: `${SITE_URL}/favicon.svg`,
-  image: `${SITE_URL}/opengraph-image.png`,
-  description: SITE_DESC,
-  email: "fenyxn2402@gmail.com",
-  contactPoint: {
-    "@type": "ContactPoint",
-    email: "hello@fenyxn.in",
-    contactType: "customer service",
-  },
-  sameAs: ["https://github.com/Fenyxn", "https://portfolio.fenyxn.in"],
-  foundingDate: "2024",
-  knowsAbout: ["Fintech", "Algorithmic Trading", "Real-time Systems", "Software Development", "Trading Automation"],
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${SITE_URL}/#organization`,
+      name: "Fenyxn",
+      url: SITE_URL,
+      logo: `${SITE_URL}/favicon.svg`,
+      image: `${SITE_URL}/opengraph-image.png`,
+      description: SITE_DESC,
+      email: "fenyxn2402@gmail.com",
+      contactPoint: {
+        "@type": "ContactPoint",
+        email: "hello@fenyxn.in",
+        contactType: "customer service",
+        areaServed: "IN",
+        availableLanguage: ["en", "hi"],
+      },
+      address: { "@type": "PostalAddress", addressCountry: "IN" },
+      areaServed: [
+        { "@type": "Country", name: "India" },
+        { "@type": "GeoShape", name: "Worldwide" },
+      ],
+      sameAs: ["https://github.com/Fenyxn", "https://portfolio.fenyxn.in"],
+      foundingDate: "2024",
+      knowsAbout: ["Fintech", "Algorithmic Trading", "Real-time Systems", "Software Development", "Trading Automation"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Fenyxn",
+      description: SITE_DESC,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      inLanguage: "en-IN",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -103,7 +124,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}>
+    <html lang="en-IN" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col relative">
         <script
           type="application/ld+json"

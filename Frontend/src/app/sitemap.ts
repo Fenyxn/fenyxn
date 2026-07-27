@@ -8,7 +8,16 @@ const SITE_URL = "https://fenyxn.in";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const pages = ["", "/about", "/services", "/work", "/contact"].map((path) => ({
+  const pages = [
+    "",
+    "/about",
+    "/services",
+    "/work",
+    "/contact",
+    "/indian-algo",
+    "/crypto-algo",
+    "/forex-algo",
+  ].map((path) => ({
     url: `${SITE_URL}${path}/`,
     lastModified: now,
     changeFrequency: "monthly" as const,

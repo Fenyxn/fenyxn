@@ -4,7 +4,7 @@ import { GlowCard } from "@/components/ui/spotlight-card";
 
 type GlowColor = "blue" | "purple" | "green" | "red" | "orange";
 
-const services: {
+export const services: {
   title: string;
   desc: string;
   features: string[];

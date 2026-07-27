@@ -89,6 +89,9 @@ export default function HeroSection() {
           style={{ fontFamily: "var(--font-instrument-serif)", fontStyle: "italic" }}
         >
           Fenyxn
+          <span className="sr-only">
+            {" "}— real-time fintech, algorithmic trading, and software studio in India
+          </span>
         </h1>
 
         <p className="hero-blur-in text-base md:text-lg text-white/70 mb-4">

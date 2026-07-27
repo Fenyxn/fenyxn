@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import ServicesGrid from "@/components/ServicesGrid";
+import ServicesGrid, { services } from "@/components/ServicesGrid";
+
+const SITE_URL = "https://fenyxn.in";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -35,9 +37,28 @@ export const metadata: Metadata = {
 };
 
 
+const servicesLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Fenyxn Services",
+  itemListElement: services.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Service",
+      name: s.title,
+      description: s.desc,
+      serviceType: s.title,
+      provider: { "@id": `${SITE_URL}/#organization` },
+      areaServed: { "@type": "Country", name: "India" },
+    },
+  })),
+};
+
 export default function Services() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesLd) }} />
       {/* Header */}
       <section className="relative py-28 px-4 text-center overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />

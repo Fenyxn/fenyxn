@@ -26,58 +26,60 @@ export default function IndianAlgo() {
   return (
     <section className="py-24 px-4 relative">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-3">
-          <div className="flex items-center gap-4 mb-5">
-            <p className="text-xs text-slate-500 font-medium uppercase tracking-[0.25em]">
-              Indian Markets
-            </p>
-            <div className="flex-1 max-w-[120px] h-px bg-white/10" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white max-w-2xl leading-tight">
-            Indian algorithmic trading,{" "}
-            <span className="italic font-normal" style={{ fontFamily: "var(--font-instrument-serif)" }}>
-              automated
-            </span>{" "}
-            end to end
-          </h2>
-          <p className="text-sm text-slate-400 mt-4 max-w-xl leading-relaxed">
-            We build trading bots for Indian stocks and options. Written in Python and connected to Zerodha
-            Kite, they place orders on the NSE for you — with live market data and automated daily login.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left: features */}
-          <motion.ul
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col gap-4"
-          >
-            {features.map((f) => (
-              <li key={f.title} className="flex gap-4">
-                <span className={`mt-1.5 w-2 h-2 rounded-full flex-shrink-0 ${f.dot}`} />
-                <div>
-                  <h3 className="text-white font-semibold text-base mb-1">{f.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{f.desc}</p>
-                </div>
-              </li>
-            ))}
-
-            <div className="mt-3">
-              <Link href="/indian-algo/" className="metal-btn">
-                <span className="metal-btn-outer">
-                  <span className="metal-btn-inner">
-                    <span>Know more</span>
-                  </span>
-                </span>
-              </Link>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-16 items-center">
+          {/* Left: header + features */}
+          <div>
+            {/* Header */}
+            <div className="mb-8">
+              <div className="flex items-center gap-4 mb-5">
+                <p className="text-xs text-slate-500 font-medium uppercase tracking-[0.25em]">
+                  Indian Markets
+                </p>
+                <div className="flex-1 max-w-[120px] h-px bg-white/10" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white max-w-2xl leading-tight">
+                Indian algorithmic trading,{" "}
+                <span className="italic font-normal" style={{ fontFamily: "var(--font-instrument-serif)" }}>
+                  automated
+                </span>{" "}
+                end to end
+              </h2>
+              <p className="text-sm text-slate-400 mt-4 max-w-xl leading-relaxed">
+                We build trading bots for Indian stocks and options. Written in Python and connected to Zerodha
+                Kite, they place orders on the NSE for you — with live market data and automated daily login.
+              </p>
             </div>
-          </motion.ul>
 
-          {/* Right: live chart */}
+            <motion.ul
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col gap-4"
+            >
+              {features.map((f) => (
+                <li key={f.title} className="flex gap-4">
+                  <span className={`mt-1.5 w-2 h-2 rounded-full flex-shrink-0 ${f.dot}`} />
+                  <div>
+                    <h3 className="text-white font-semibold text-base mb-1">{f.title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">{f.desc}</p>
+                  </div>
+                </li>
+              ))}
+
+              <div className="mt-3">
+                <Link href="/indian-algo/" className="metal-btn">
+                  <span className="metal-btn-outer">
+                    <span className="metal-btn-inner">
+                      <span>Know more</span>
+                    </span>
+                  </span>
+                </Link>
+              </div>
+            </motion.ul>
+          </div>
+
+          {/* Right: live chart, centered in a card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -85,7 +87,7 @@ export default function IndianAlgo() {
             transition={{ duration: 0.7 }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="w-full max-w-[680px]">
+            <div className="w-full rounded-3xl border border-white/10 bg-white/[0.02] p-4 sm:p-6 shadow-2xl shadow-black/40 backdrop-blur-sm">
               <CandlestickChart />
             </div>
           </motion.div>
