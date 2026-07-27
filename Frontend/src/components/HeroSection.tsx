@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import Hls from "hls.js";
 
@@ -112,18 +113,18 @@ export default function HeroSection() {
         </p>
 
         <div className="hero-blur-in inline-flex gap-4 flex-wrap justify-center">
-          <a
-            href="/work"
+          <Link
+            href="/work/"
             className="rounded-full text-sm px-7 py-3.5 bg-white text-black font-medium hover:scale-105 transition-transform"
           >
             See Our Work
-          </a>
-          <a
-            href="/contact"
+          </Link>
+          <Link
+            href="/contact/"
             className="rounded-full text-sm px-7 py-3.5 border-2 border-white/25 text-white font-medium hover:scale-105 hover:border-white/50 transition-all"
           >
             Reach out ↗
-          </a>
+          </Link>
         </div>
       </div>
 
