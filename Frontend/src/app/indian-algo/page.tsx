@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getArticle } from "@/data/articles";
+import FaqSection, { type Faq } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
   title: "Indian Algo Trading — Intraday & Options Strategies",
@@ -81,6 +82,33 @@ const strategies = [
       "Holds the position across sessions with a trailing stop that rides the move.",
       "Trades less often but aims for larger gains, cutting the intraday churn.",
     ],
+  },
+];
+
+const faqs: Faq[] = [
+  {
+    q: "Is algorithmic trading legal in India?",
+    a: "Yes. Retail algo trading is permitted and runs inside a framework SEBI defined for it, covering broker APIs, algo registration, and order-rate limits. The rules keep evolving, so we build to whatever your broker and the exchanges currently require.",
+  },
+  {
+    q: "Which brokers can you work with?",
+    a: "Any broker that exposes a trading API — Zerodha, Angel One, Dhan, Upstox, and Fyers among them. The strategy logic stays the same; only the broker integration changes.",
+  },
+  {
+    q: "Do I need to know how to code?",
+    a: "No. You describe your rules — entries, exits, stop-losses, position sizing — and we write and run the Python that executes them.",
+  },
+  {
+    q: "Where do the trades actually happen?",
+    a: "In your own broker account, through your own API keys. We never take custody of your funds, and you can revoke access or stop the system at any time.",
+  },
+  {
+    q: "Do you test a strategy before it goes live?",
+    a: "Yes. Every strategy is backtested on historical data first so you can see how it would have behaved. Past results are not a promise of future performance — no strategy removes market risk.",
+  },
+  {
+    q: "Can you automate a strategy I already trade manually?",
+    a: "That's most of what we do. If your rules can be written down precisely, they can be coded, tested, and run without you watching the screen.",
   },
 ];
 
@@ -211,6 +239,8 @@ export default function IndianAlgoPage() {
           </div>
         </div>
       </section>
+
+      <FaqSection items={faqs} />
 
       {/* CTA */}
       <section className="py-16 px-4 text-center">
